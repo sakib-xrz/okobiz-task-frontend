@@ -5,6 +5,8 @@ import nid_bg from "@/public/nid_bg.png";
 import Image from "next/image";
 import user from "@/public/user.jpeg";
 
+import provider_sign from "@/public/provider_sign.png";
+
 export default function Home() {
   return (
     <Container>
@@ -111,11 +113,12 @@ export default function Home() {
               </p>
             </div>
 
-            <p className="absolute bottom-1 left-2 text-[8.9px]">
-              রক্তের গ্রুপ / Blood Group:
+            <p className="absolute bottom-0.5 left-2 text-[8.9px]">
+              রক্তের গ্রুপ / Blood Group:{" "}
+              <span className="text-[10px] text-[#FF0000]">O+</span>
             </p>
 
-            <p className="absolute bottom-1 left-36 text-[8.9px]">
+            <p className="absolute bottom-0.5 left-36 text-[8.9px]">
               জন্মস্থান: বরগুনা
             </p>
 
@@ -123,6 +126,15 @@ export default function Home() {
             <p className="absolute bottom-0 right-0 bg-black text-[8.9px] text-white">
               মূদ্রণ : ০১
             </p>
+          </div>
+
+          <div className="p-2">
+            <div className="flex items-end justify-between">
+              <Image src={provider_sign} alt="provider_sign" className="w-28" />
+              <p className="pb-0.5 font-[family-name:var(--font-bangla)] text-[8.9px] font-[450]">
+                প্রদানের তারিখ: ২৯/১১/২০২১
+              </p>
+            </div>
           </div>
         </div>
       </div>
