@@ -6,7 +6,7 @@ import Image from "next/image";
 import user from "@/public/user.jpeg";
 
 import provider_sign from "@/public/provider_sign.png";
-import Barcode from "react-barcode";
+import barcode from "@/public/barcode.png";
 
 export default function Nid({ data }) {
   const {
@@ -23,12 +23,12 @@ export default function Nid({ data }) {
     upazila,
     zila,
     blood_group,
-    birth_place,
     delivery_date,
+    photo,
   } = data;
 
   return (
-    <div className="pointer-events-none flex select-none items-center justify-center gap-10 max-md:flex-col">
+    <div className="pointer-events-none flex select-none flex-col items-center justify-center gap-6">
       {/* front part */}
 
       <div className="h-[204px] w-[324px] border-2 border-black font-medium">
@@ -62,9 +62,11 @@ export default function Nid({ data }) {
           <div className="flex gap-2">
             <div className="w-[70px]">
               <Image
-                src={user}
+                src={photo ? URL.createObjectURL(photo) : ""}
                 alt="user"
-                className="h-[79px] w-[69px] border object-cover"
+                className="h-[79px] w-[69px] object-cover"
+                width={69}
+                height={79}
               />
               <div>
                 <p className="mt-1 text-center font-[family-name:var(--font-signature)] text-sm font-semibold">
@@ -122,12 +124,8 @@ export default function Nid({ data }) {
           <p className="absolute bottom-0.5 left-2 text-[8.9px]">
             রক্তের গ্রুপ / Blood Group:{" "}
             <span className="text-[10px] text-[#FF0000]">
-              {blood_group || ""}
+              {blood_group?.value || ""}
             </span>
-          </p>
-
-          <p className="absolute bottom-0.5 left-36 text-[8.9px]">
-            জন্মস্থান: {birth_place || ""}
           </p>
 
           {/* mudron no  */}
@@ -143,13 +141,8 @@ export default function Nid({ data }) {
               প্রদানের তারিখ: ২৯/১১/২০২১
             </p>
           </div>
-          <div>
-            <Barcode
-              className="h-fit w-[305px]"
-              displayValue={false}
-              height={85}
-              value={`${e_name}, ${dob}`}
-            />
+          <div className="h-10 w-[305px] overflow-hidden">
+            <Image src={barcode} alt="barcode" className="object-cover" />
           </div>
         </div>
       </div>

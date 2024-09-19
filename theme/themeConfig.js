@@ -1,3 +1,5 @@
+import { DatePicker } from "antd";
+
 const themeConfig = {
   token: {
     controlHeightSM: 34,
@@ -53,6 +55,22 @@ const themeConfig = {
     },
     Form: {
       itemMarginBottom: 16,
+    },
+    Input: {
+      colorBorder: "#E4E4E4",
+      activeBorderColor: "rgb(15,118,110)",
+      hoverBorderColor: "rgb(15,118,110)",
+      lineWidth: 2,
+      activeShadow: "0 0 0 2px rgba(15, 118, 110, 0.3)",
+      algorithm: true,
+    },
+    DatePicker: {
+      colorBorder: "#E4E4E4",
+      activeBorderColor: "rgb(15,118,110)",
+      hoverBorderColor: "rgb(15,118,110)",
+      lineWidth: 2,
+      activeShadow: "0 0 0 2px rgba(15, 118, 110, 0.3)",
+      algorithm: true,
     },
   },
 };

@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ant-upload-wrapper .ant-upload-select {
+  display: block !important;
+}
