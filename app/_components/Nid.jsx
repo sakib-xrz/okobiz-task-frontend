@@ -20,7 +20,7 @@ export default function Nid({ data, setPreview, formik }) {
     nid_no,
     signature,
     house_or_holding,
-    village_or_rode,
+    village_or_road,
     post_office,
     upazila,
     zila,
@@ -150,7 +150,7 @@ export default function Nid({ data, setPreview, formik }) {
           <div className="relative h-[68px] border-b-2 border-black">
             <p className="px-2 py-1 text-center font-[family-name:var(--font-bangla)] text-[8.9px]">
               ঠিকানা: বাসা/হোল্ডিং: {house_or_holding}, গ্রাম/রাস্তা:{" "}
-              {village_or_rode}, ডাকঘর: {post_office}, {upazila}, {zila}
+              {village_or_road}, ডাকঘর: {post_office}, {upazila}, {zila}
             </p>
             <p className="absolute bottom-0.5 left-2 text-[8.9px]">
               রক্তের গ্রুপ / Blood Group:{" "}

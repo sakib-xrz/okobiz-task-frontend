@@ -29,7 +29,7 @@ const bengaliTextValidation = (fieldName) =>
 //   zila: "ঢাকা",
 //   upazila: "ঢাকা উত্তর সিটি  কর্পোরেশন",
 //   post_office: "মিরপুর - ৮৭৩০",
-//   village_or_rode: "ইস্টার্ন হাউজিং, ব্লক-জে,রোড-এন/৮, দ্বিগুন",
+//   village_or_road: "ইস্টার্ন হাউজিং, ব্লক-জে,রোড-এন/৮, দ্বিগুন",
 //   house_or_holding: "১৭",
 // };
 
@@ -47,7 +47,7 @@ export default function Home() {
       zila: "ঢাকা",
       upazila: "ঢাকা উত্তর সিটি কর্পোরেশন",
       post_office: "মিরপুর - ৮৭৩০",
-      village_or_rode: "ইস্টার্ন হাউজিং, ব্লক-জে,রোড-এন/৮, দ্বিগুন",
+      village_or_road: "ইস্টার্ন হাউজিং, ব্লক-জে,রোড-এন/৮, দ্বিগুন",
       house_or_holding: "১৭",
       blood_group: null,
       card_issue_date: "",
@@ -64,7 +64,7 @@ export default function Home() {
       zila: bengaliTextValidation("Zila"),
       upazila: bengaliTextValidation("Upazila"),
       post_office: bengaliTextValidation("Post Office"),
-      village_or_rode: bengaliTextValidation("Village/Rode"),
+      village_or_road: bengaliTextValidation("Village/Rode"),
       house_or_holding: bengaliTextValidation("House/Holding"),
       blood_group: Yup.object().required("Blood Group is required"),
       card_issue_date: Yup.string().required("Card Issuance Date is required"),
@@ -212,16 +212,16 @@ export default function Home() {
                     <FormikError formik={formik} name="post_office" />
                   </div>
                   <div className="space-y-1">
-                    <Label htmlFor="village_or_rode" required>
+                    <Label htmlFor="village_or_road" required>
                       Village/Road (বাংলায়)
                     </Label>
                     <Input
-                      id="village_or_rode"
-                      name="village_or_rode"
+                      id="village_or_road"
+                      name="village_or_road"
                       placeholder="আপনার গ্রাম/রাস্তার নাম লিখুন"
-                      {...formik.getFieldProps("village_or_rode")}
+                      {...formik.getFieldProps("village_or_road")}
                     />
-                    <FormikError formik={formik} name="village_or_rode" />
+                    <FormikError formik={formik} name="village_or_road" />
                   </div>
                   <div className="space-y-1">
                     <Label htmlFor="house_or_holding" required>
