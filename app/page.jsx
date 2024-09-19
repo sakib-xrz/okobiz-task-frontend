@@ -9,6 +9,15 @@ import { useFormik } from "formik";
 import FormikError from "@/components/shared/FormikError";
 import { bloodGroups } from "@/lib/keyChain";
 import { useState } from "react";
+import * as Yup from "yup";
+
+const bengaliTextValidation = (fieldName) =>
+  Yup.string()
+    .matches(
+      /^[\u0980-\u09FF\s,\/\-\u0030-\u0039]+$/,
+      `Only valid Bengali characters are allowed for ${fieldName}`,
+    )
+    .required(`${fieldName} is required`);
 
 // const data = {
 //   b_name: "মোঃ সাকীবুল ইসলাম",
@@ -44,7 +53,23 @@ export default function Home() {
       card_issue_date: "",
       photo: null,
     },
-    // validationSchema: {},
+    validationSchema: Yup.object().shape({
+      b_name: bengaliTextValidation("Name"),
+      e_name: Yup.string().required("Name is required"),
+      father_name: bengaliTextValidation("Father's Name"),
+      mother_name: bengaliTextValidation("Mother's Name"),
+      signature: Yup.string().required("Signature is required"),
+      nid_no: Yup.string().required("NID No. is required"),
+      dob: Yup.string().required("Date of Birth is required"),
+      zila: bengaliTextValidation("Zila"),
+      upazila: bengaliTextValidation("Upazila"),
+      post_office: bengaliTextValidation("Post Office"),
+      village_or_rode: bengaliTextValidation("Village/Rode"),
+      house_or_holding: bengaliTextValidation("House/Holding"),
+      blood_group: Yup.object().required("Blood Group is required"),
+      card_issue_date: Yup.string().required("Card Issuance Date is required"),
+      photo: Yup.mixed().required("Image is required"),
+    }),
     onSubmit: (values) => {
       setPreview(true);
     },
@@ -148,6 +173,7 @@ export default function Home() {
                         formik.setFieldValue("dob", dateString);
                       }}
                     />
+                    <FormikError formik={formik} name="dob" />
                   </div>
                   <div className="space-y-1">
                     <Label htmlFor="zila" required>
@@ -219,10 +245,13 @@ export default function Home() {
                       options={bloodGroups}
                       value={formik.values.blood_group}
                       onChange={(value) => {
-                        formik.setFieldValue("blood_group", value);
+                        formik.setFieldValue(
+                          "blood_group",
+                          bloodGroups.find((group) => group.value === value),
+                        );
                       }}
                     />
-                    <FormikError formik={formik} name="house_or_holding" />
+                    <FormikError formik={formik} name="blood_group" />
                   </div>
                   <div className="flex w-full flex-col gap-1">
                     <Label htmlFor="card_issue_date" required>
@@ -234,6 +263,7 @@ export default function Home() {
                         formik.setFieldValue("card_issue_date", dateString);
                       }}
                     />
+                    <FormikError formik={formik} name="card_issue_date" />
                   </div>
                   <div className="flex w-full flex-col gap-1">
                     <Label htmlFor="photo" required>
@@ -244,8 +274,7 @@ export default function Home() {
                       multiple={false}
                       accept=".jpg,.jpeg,.png"
                       onChange={({ file }) => {
-                        formik.setFieldValue("photo", file?.originFileObj),
-                          console.log(file?.originFileObj);
+                        formik.setFieldValue("photo", file?.originFileObj);
                       }}
                     >
                       <Button icon={<UploadIcon />} className="!w-full">

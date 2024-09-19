@@ -29,8 +29,6 @@ export default function Nid({ data, setPreview, formik }) {
     photo,
   } = data;
 
-  console.log(blood_group);
-
   const nidRef = useRef(null); // Create a ref for the component
 
   const downloadImage = () => {
@@ -157,7 +155,7 @@ export default function Nid({ data, setPreview, formik }) {
             <p className="absolute bottom-0.5 left-2 text-[8.9px]">
               রক্তের গ্রুপ / Blood Group:{" "}
               <span className="text-[10px] text-[#FF0000]">
-                {blood_group || ""}
+                {blood_group?.value || ""}
               </span>
             </p>
             <p className="absolute bottom-0 right-0 bg-black text-[8.9px] text-white">
