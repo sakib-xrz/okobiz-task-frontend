@@ -7,56 +7,53 @@ import { Upload as UploadIcon } from "lucide-react";
 import Label from "@/components/shared/Label";
 import { useFormik } from "formik";
 import FormikError from "@/components/shared/FormikError";
-import moment from "moment";
 import { bloodGroups } from "@/lib/keyChain";
+import { useState } from "react";
 
 // const data = {
 //   b_name: "মোঃ সাকীবুল ইসলাম",
 //   e_name: "MD SAKIBUL ISLAM",
 //   father_name: "মোঃ আব্দুস সালাম সিকদার",
 //   mother_name: "মোসাঃ শাহীনা বেগম",
-//   dob: "22 Aug 1999",
-//   nid_no: "4207590631",
 //   signature: "Sakibul Islam",
-//   house_or_holding: "১৭",
-//   village_or_rode: "ইস্টার্ন হাউজিং, ব্লক-জে,রোড-এন/৮, দ্বিগুন",
-//   post_office: "মিরপুর - ৮৭৩০",
-//   upazila: "ঢাকা উত্তর সিটি  কর্পোরেশন",
+//   nid_no: "4207590631",
 //   zila: "ঢাকা",
-//   blood_group: { value: "A+", label: "A+" },
-//   birth_place: "বরগুনা",
-//   card_issue_date: "২৯/১১/২০২১",
-//   photo: null,
+//   upazila: "ঢাকা উত্তর সিটি  কর্পোরেশন",
+//   post_office: "মিরপুর - ৮৭৩০",
+//   village_or_rode: "ইস্টার্ন হাউজিং, ব্লক-জে,রোড-এন/৮, দ্বিগুন",
+//   house_or_holding: "১৭",
 // };
 
 export default function Home() {
+  const [preview, setPreview] = useState(false);
   const formik = useFormik({
     initialValues: {
-      b_name: "",
-      e_name: "",
-      father_name: "",
-      mother_name: "",
-      signature: "",
+      b_name: "মোঃ সাকীবুল ইসলাম",
+      e_name: "MD SAKIBUL ISLAM",
+      father_name: "মোঃ আব্দুস সালাম সিকদার",
+      mother_name: "মোসাঃ শাহীনা বেগম",
+      signature: "Sakibul Islam",
+      nid_no: "4207590631",
       dob: "",
-      zila: "",
-      upazila: "",
-      post_office: "",
-      village_or_rode: "",
-      house_or_holding: "",
+      zila: "ঢাকা",
+      upazila: "ঢাকা উত্তর সিটি কর্পোরেশন",
+      post_office: "মিরপুর - ৮৭৩০",
+      village_or_rode: "ইস্টার্ন হাউজিং, ব্লক-জে,রোড-এন/৮, দ্বিগুন",
+      house_or_holding: "১৭",
       blood_group: null,
       card_issue_date: "",
       photo: null,
     },
     // validationSchema: {},
     onSubmit: (values) => {
-      console.log(values);
+      setPreview(true);
     },
   });
 
   return (
     <Container>
-      <div className="flex items-start justify-center gap-10">
-        <div>
+      {!preview ? (
+        <div className="mx-auto sm:w-8/12 lg:w-6/12">
           <Card>
             <div className="space-y-3">
               <h4 className="text-center font-[family-name:var(--font-english)] font-semibold text-primary max-sm:text-2xl sm:text-3xl">
@@ -65,7 +62,7 @@ export default function Home() {
 
               <hr />
 
-              <form>
+              <form className="space-y-5" onSubmit={formik.handleSubmit}>
                 <div className="space-y-2">
                   <div className="space-y-1">
                     <Label htmlFor="b_name" required>
@@ -129,16 +126,23 @@ export default function Home() {
                     />
                     <FormikError formik={formik} name="signature" />
                   </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="nid_no" required>
+                      NID No. (in English)
+                    </Label>
+                    <Input
+                      id="nid_no"
+                      name="nid_no"
+                      placeholder="Enter your nid number"
+                      {...formik.getFieldProps("nid_no")}
+                    />
+                    <FormikError formik={formik} name="nid_no" />
+                  </div>
                   <div className="flex w-full flex-col gap-1">
                     <Label htmlFor="dob" required>
                       Date of Birth
                     </Label>
                     <DatePicker
-                      // value={
-                      //   formik.values.dob
-                      //     ? moment(formik.values.dob, "YYYY-MM-DD")
-                      //     : null
-                      // }
                       placeholder="Select your date of birth"
                       onChange={(_, dateString) => {
                         formik.setFieldValue("dob", dateString);
@@ -211,6 +215,7 @@ export default function Home() {
                     </Label>
                     <Select
                       className="w-full"
+                      placeholder="Select your blood group"
                       options={bloodGroups}
                       value={formik.values.blood_group}
                       onChange={(value) => {
@@ -224,11 +229,6 @@ export default function Home() {
                       Card Issuance Date
                     </Label>
                     <DatePicker
-                      // value={
-                      //   formik.values.card_issue_date
-                      //     ? moment(formik.values.card_issue_date, "YYYY-MM-DD")
-                      //     : null
-                      // }
                       placeholder="Select your card issuance date"
                       onChange={(_, dateString) => {
                         formik.setFieldValue("card_issue_date", dateString);
@@ -255,21 +255,17 @@ export default function Home() {
                     <FormikError formik={formik} name="photo" />
                   </div>
                 </div>
+
+                <Button htmlType="submit" type="primary" className="w-full">
+                  Generate NID Card
+                </Button>
               </form>
             </div>
           </Card>
         </div>
-
-        <div>
-          <div className="space-y-3 rounded-lg border p-4">
-            <h4 className="text-center font-[family-name:var(--font-english)] font-semibold text-primary max-sm:text-2xl sm:text-3xl">
-              Preview
-            </h4>
-
-            <Nid data={formik.values} />
-          </div>
-        </div>
-      </div>
+      ) : (
+        <Nid data={formik.values} setPreview={setPreview} formik={formik} />
+      )}
     </Container>
   );
 }
