@@ -42,6 +42,10 @@ export default function Nid({ data, setPreview, formik }) {
           link.href = dataUrl;
           link.click();
         })
+        .then(() => {
+          setPreview(false);
+          formik.resetForm();
+        })
         .catch((err) => {
           console.error("Error generating image: ", err);
         });
@@ -181,14 +185,6 @@ export default function Nid({ data, setPreview, formik }) {
       <div className="flex flex-col gap-2">
         <Button onClick={downloadImage} type="primary">
           Download NID Image
-        </Button>
-        <Button
-          onClick={() => {
-            setPreview(false);
-            formik.resetForm();
-          }}
-        >
-          Generate New NID
         </Button>
       </div>
     </div>
