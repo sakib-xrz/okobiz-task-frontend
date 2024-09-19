@@ -29,14 +29,14 @@ export default function Nid({ data, setPreview, formik }) {
     photo,
   } = data;
 
-  const nidRef = useRef(null); // Create a ref for the component
+  const nidRef = useRef(null);
 
   const downloadImage = () => {
     if (nidRef.current) {
       toPng(nidRef.current)
         .then((dataUrl) => {
           const link = document.createElement("a");
-          link.download = "nid_card.png"; // Set the download file name
+          link.download = "nid_card.png";
           link.href = dataUrl;
           link.click();
         })
