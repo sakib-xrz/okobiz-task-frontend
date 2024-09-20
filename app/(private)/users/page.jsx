@@ -11,6 +11,7 @@ import { generateQueryString, sanitizeParams } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import ApiKit from "@/common/ApiKit";
 import UserCard from "./_components/UserCard";
+import { Pagination } from "antd";
 
 export default function Users() {
   const router = useRouter();
@@ -61,8 +62,7 @@ export default function Users() {
     return;
   }
 
-  console.log(data?.meta);
-  console.log(data?.data);
+  console.log(data?.meta?.total);
 
   return (
     <div className="space-y-5">
@@ -79,10 +79,26 @@ export default function Users() {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className="space-y-2">
-          {data?.data?.map((user) => (
-            <UserCard key={user.id} user={user} />
-          ))}
+        <div className="space-y-5">
+          <div className="space-y-2">
+            {data?.data?.map((user) => (
+              <UserCard key={user.id} user={user} />
+            ))}
+          </div>
+          <div>
+            <Pagination
+              align="center"
+              current={params?.page}
+              onChange={(page) => {
+                setParams((prevParams) => ({
+                  ...prevParams,
+                  page,
+                }));
+              }}
+              total={data?.meta?.total}
+              pageSize={params?.limit}
+            />
+          </div>
         </div>
       )}
     </div>

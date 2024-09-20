@@ -1,13 +1,12 @@
 "use client";
 
-import { Button, Select, Tag, Tooltip } from "antd";
+import { Select, Tag } from "antd";
 import { format } from "date-fns";
 import { filterOptions } from "./UserSearchSortFilter";
-import { EyeIcon } from "lucide-react";
 
 export default function UserCard({ user }) {
   return (
-    <div className="max-w-full rounded-lg border bg-white p-6 shadow-sm transition-shadow duration-300 hover:shadow-lg">
+    <div className="max-w-full rounded-lg border bg-white p-6 shadow-sm">
       {/* Card Layout */}
       <div className="grid grid-cols-1 items-center gap-4 md:grid-cols-12 md:gap-6">
         {/* User Info */}
@@ -47,9 +46,9 @@ export default function UserCard({ user }) {
 
         <div className="flex flex-col items-start gap-1 md:col-span-3 md:items-center">
           <h3 className="text-sm font-medium text-gray-500">Change Status</h3>
-          <div className="flex gap-2">
+          <div className="flex w-full gap-2 md:justify-center">
             <Select
-              className="w-36 !text-center"
+              className="w-full !text-center xs:w-36"
               options={filterOptions}
               value={filterOptions.find(
                 (option) => option.value === user.status,
