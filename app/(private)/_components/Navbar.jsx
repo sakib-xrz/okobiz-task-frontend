@@ -40,12 +40,12 @@ export default function Navbar() {
   return (
     <div className="border-border sticky top-0 z-50 border-b bg-white">
       <div className="mx-auto flex h-20 w-full max-w-[1400px] items-center justify-between px-2">
-        <Link href={"/nid"} className="h-14">
+        <Link href={"/nid"} className="h-12">
           <Image
             src={logo}
             alt="AppointEase Logo"
             quality={100}
-            className="aspect-auto h-full w-auto object-cover"
+            className="aspect-auto h-12 w-auto object-cover md:h-full"
             loading="eager"
           />
         </Link>
@@ -53,7 +53,7 @@ export default function Navbar() {
           <UserProfile />
         </div>
         <div className="sm:hidden">
-          <Menu className="size-8" onClick={showDrawer} />
+          <Menu className="size-8 text-primary" onClick={showDrawer} />
         </div>
       </div>
 
