@@ -70,8 +70,8 @@ export default function UserSearchSortFilter({
   };
 
   return (
-    <div className="flex items-center gap-5">
-      <div className="w-6/12">
+    <div className="w-fill flex gap-5 max-md:flex-col xs:md:items-center">
+      <div className="w-full md:w-6/12">
         <Input
           placeholder="Search by user name or email"
           onChange={handleSearchChange}
@@ -80,8 +80,8 @@ export default function UserSearchSortFilter({
         />
       </div>
 
-      <div className="flex w-6/12 items-center gap-5">
-        <div className="w-1/2">
+      <div className="flex w-full gap-5 max-xs:flex-col xs:items-center md:w-6/12">
+        <div className="w-fill xs:w-1/2">
           <Select
             placeholder="Filter by user status"
             className="w-full"
@@ -96,7 +96,7 @@ export default function UserSearchSortFilter({
             allowClear
           />
         </div>
-        <div className="w-1/2">
+        <div className="w-fill xs:w-1/2">
           <Select
             placeholder="Sort by"
             className="w-full"
