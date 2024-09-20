@@ -9,8 +9,10 @@ import provider_sign from "@/public/provider_sign.png";
 import barcode from "@/public/barcode.png";
 import { formatDate, formatDateBangla } from "@/lib/utils";
 import { Button } from "antd";
+import { useRouter } from "next/navigation";
 
-export default function Nid({ data, setPreview, formik }) {
+export default function Nid({ data }) {
+  const router = useRouter();
   const {
     b_name,
     e_name,
@@ -41,8 +43,7 @@ export default function Nid({ data, setPreview, formik }) {
           link.click();
         })
         .then(() => {
-          setPreview(false);
-          formik.resetForm();
+          router.push("/nid");
         })
         .catch((err) => {
           console.error("Error generating image: ", err);
@@ -91,11 +92,12 @@ export default function Nid({ data, setPreview, formik }) {
             <div className="flex gap-2">
               <div className="w-[70px]">
                 <Image
-                  src={photo ? URL.createObjectURL(photo) : ""}
+                  src={photo}
                   alt="user"
                   className="h-[79px] w-[69px] object-cover"
                   width={69}
                   height={79}
+                  loading="eager"
                 />
                 <div>
                   <p className="mt-1 text-center font-[family-name:var(--font-signature)] text-sm font-semibold">

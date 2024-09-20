@@ -22,6 +22,21 @@ const ApiKit = {
     },
   },
 
+  nid: {
+    create: (payload) => {
+      const url = "/nids";
+      return client.post(url, payload, defaultFileUploadConfig);
+    },
+    getNidByKey: (key) => {
+      const url = `/nids/${key}`;
+      return client.get(url);
+    },
+    getALlNidsByUserId: (userId) => {
+      const url = `/nids/user/${userId}`;
+      return client.get(url);
+    },
+  },
+
   user: {
     getUsers: (params) => {
       const url = "/users";
