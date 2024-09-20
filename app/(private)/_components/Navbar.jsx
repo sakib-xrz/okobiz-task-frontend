@@ -5,15 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Avatar, Drawer, Menu as AntdMenu, Button } from "antd";
-import {
-  CalendarDays,
-  IdCard,
-  LogOut,
-  Menu,
-  UserRound,
-  UsersRound,
-  X,
-} from "lucide-react";
+import { LogOut, Menu, UserRound, X } from "lucide-react";
 import useStore from "@/store";
 import UserProfile from "./UserProfile";
 import logo from "@/public/logo.png";

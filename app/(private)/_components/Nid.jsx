@@ -30,6 +30,7 @@ export default function Nid({ data }) {
     zila,
     blood_group,
     card_issue_date,
+    photo: photoUrl,
   } = data;
 
   const nidRef = useRef(null);
@@ -94,7 +95,7 @@ export default function Nid({ data }) {
             <div className="flex gap-2">
               <div className="w-[70px]">
                 <Image
-                  src={photo ? URL.createObjectURL(photo) : ""}
+                  src={photo ? URL.createObjectURL(photo) : photoUrl}
                   alt="user"
                   className="h-[79px] w-[69px] object-cover"
                   width={69}
