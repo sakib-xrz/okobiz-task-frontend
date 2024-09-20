@@ -44,7 +44,7 @@ client.interceptors.response.use(
       statusCode: response?.data?.statusCode || 200,
       message: response?.data?.message || "Request successful",
       meta: response?.data?.meta || null,
-      data: response?.data?.result || response?.data,
+      data: response?.data?.data || response?.data,
     };
     return responseObject;
   },
@@ -55,7 +55,7 @@ client.interceptors.response.use(
       errorMessages: error.response?.data?.errorMessages || [],
     };
     return Promise.reject(errorResponse);
-  }
+  },
 );
 
 const HttpKit = {

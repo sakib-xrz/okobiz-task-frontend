@@ -16,13 +16,13 @@ const ApiKit = {
       const url = "/auth/login";
       return client.post(url, payload);
     },
+    getMe: () => {
+      const url = "/auth/me";
+      return client.get(url);
+    },
   },
 
   user: {
-    getMe: () => {
-      const url = "users/me";
-      return client.get(url);
-    },
     getUsers: (params) => {
       const url = "/users";
       return client.get(url, { params });

@@ -43,5 +43,5 @@ export default function AuthGuardHoc({ children }) {
     return <Loading className="h-screen" />;
   }
 
-  return user?.username ? children : null;
+  return user?.email && user.status === "ACTIVE" ? children : null;
 }

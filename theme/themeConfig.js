@@ -20,6 +20,10 @@ const themeConfig = {
       paddingBlock: 12,
       fontSize: 16,
       fontSizeIcon: 16,
+      controlItemBgActive: "rgb(15,118,110)",
+      controlItemBgHover: "rgba(15,118,109,0.1)",
+      controlItemBgActiveHover: "rgb(15,118,110)",
+      colorPrimary: "rgb(255,255,255)",
       algorithm: true,
     },
     Menu: {

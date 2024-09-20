@@ -22,7 +22,7 @@ const signatureFont = localFont({
 });
 
 export const metadata = {
-  title: "NID Generator",
+  title: "NID GENERATOR",
   description: "Generate NID card",
 };
 
