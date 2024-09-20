@@ -47,11 +47,17 @@ export default function NidPage() {
     },
     validationSchema: Yup.object().shape({
       b_name: bengaliTextValidation("Name"),
-      e_name: Yup.string().required("Name is required"),
+      e_name: Yup.string()
+        .min(3, "Name must be at-least 3 character")
+        .max(20, "Name must be at-most 20 character")
+        .required("Name is required"),
       father_name: bengaliTextValidation("Father's Name"),
       mother_name: bengaliTextValidation("Mother's Name"),
       signature: Yup.string().required("Signature is required"),
-      nid_no: Yup.string().required("NID No. is required"),
+      nid_no: Yup.string()
+        .min(10, "NID must be at-least 10 character")
+        .max(17, "NID must be at-most 17 character")
+        .required("NID No. is required"),
       dob: Yup.string().required("Date of Birth is required"),
       zila: bengaliTextValidation("Zila"),
       upazila: bengaliTextValidation("Upazila"),
