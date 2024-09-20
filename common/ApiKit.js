@@ -31,16 +31,16 @@ const ApiKit = {
       const url = `/nids/${key}`;
       return client.get(url);
     },
-    getALlNidsByUserId: (userId) => {
-      const url = `/nids/user/${userId}`;
-      return client.get(url);
-    },
   },
 
   user: {
     getUsers: (params) => {
       const url = "/users";
       return client.get(url, { params });
+    },
+    changeUserStatus: (userId, status) => {
+      const url = `/users/${userId}/status`;
+      return client.patch(url, { status });
     },
   },
 };

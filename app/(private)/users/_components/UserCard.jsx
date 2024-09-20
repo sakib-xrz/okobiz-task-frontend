@@ -3,8 +3,23 @@
 import { Select, Tag } from "antd";
 import { format } from "date-fns";
 import { filterOptions } from "./UserSearchSortFilter";
+import ApiKit from "@/common/ApiKit";
+import { toast } from "sonner";
 
-export default function UserCard({ user }) {
+export default function UserCard({ user, refetch }) {
+  const handleChangeStatus = async (userId, status) => {
+    const promise = (async () => {
+      await ApiKit.user.changeUserStatus(userId, status);
+      refetch();
+    })();
+
+    toast.promise(promise, {
+      loading: "Changing status...",
+      success: "Status changed successfully",
+      error: "Failed to change status",
+    });
+  };
+
   return (
     <div className="max-w-full rounded-lg border bg-white p-6 shadow-sm">
       {/* Card Layout */}
@@ -53,6 +68,7 @@ export default function UserCard({ user }) {
               value={filterOptions.find(
                 (option) => option.value === user.status,
               )}
+              onChange={(value) => handleChangeStatus(user._id, value)}
             />
           </div>
         </div>

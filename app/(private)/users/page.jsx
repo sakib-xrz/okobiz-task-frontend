@@ -11,7 +11,7 @@ import { generateQueryString, sanitizeParams } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import ApiKit from "@/common/ApiKit";
 import UserCard from "./_components/UserCard";
-import { Pagination } from "antd";
+import { Empty, Pagination } from "antd";
 
 export default function Users() {
   const router = useRouter();
@@ -62,8 +62,6 @@ export default function Users() {
     return;
   }
 
-  console.log(data?.meta?.total);
-
   return (
     <div className="space-y-5">
       <h2 className="text-3xl font-semibold">Users</h2>
@@ -78,11 +76,15 @@ export default function Users() {
 
       {isLoading ? (
         <Loading />
+      ) : data?.meta?.total === 0 ? (
+        <div>
+          <Empty description="No user found" className="mt-20" />
+        </div>
       ) : (
         <div className="space-y-5">
           <div className="space-y-2">
             {data?.data?.map((user) => (
-              <UserCard key={user.id} user={user} />
+              <UserCard key={user._id} user={user} refetch={refetch} />
             ))}
           </div>
           <div>
