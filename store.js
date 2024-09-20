@@ -11,6 +11,7 @@ if (typeof window !== "undefined") {
 const useStore = create((set) => ({
   user: null,
   userLoading: false,
+  photo: null,
 
   fetchUser: async () => {
     try {
@@ -30,6 +31,8 @@ const useStore = create((set) => ({
     localStorage.removeItem(AUTH_TOKEN_KEY);
     await HttpKit.removeClientToken();
   },
+
+  setPhoto: (photo) => set({ photo }),
 }));
 
 export default useStore;

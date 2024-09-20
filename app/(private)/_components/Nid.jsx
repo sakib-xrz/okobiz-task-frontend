@@ -10,9 +10,11 @@ import barcode from "@/public/barcode.png";
 import { formatDate, formatDateBangla } from "@/lib/utils";
 import { Button } from "antd";
 import { useRouter } from "next/navigation";
+import useStore from "@/store";
 
 export default function Nid({ data }) {
   const router = useRouter();
+  const { photo, setPhoto } = useStore();
   const {
     b_name,
     e_name,
@@ -28,7 +30,6 @@ export default function Nid({ data }) {
     zila,
     blood_group,
     card_issue_date,
-    photo,
   } = data;
 
   const nidRef = useRef(null);
@@ -44,6 +45,7 @@ export default function Nid({ data }) {
         })
         .then(() => {
           router.push("/nid");
+          setPhoto(null);
         })
         .catch((err) => {
           console.error("Error generating image: ", err);
@@ -92,7 +94,7 @@ export default function Nid({ data }) {
             <div className="flex gap-2">
               <div className="w-[70px]">
                 <Image
-                  src={photo}
+                  src={photo ? URL.createObjectURL(photo) : ""}
                   alt="user"
                   className="h-[79px] w-[69px] object-cover"
                   width={69}

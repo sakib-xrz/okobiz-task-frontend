@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import { toast } from "sonner";
 import ApiKit from "@/common/ApiKit";
+import useStore from "@/store";
 
 const bengaliTextValidation = (fieldName) =>
   Yup.string()
@@ -22,37 +23,24 @@ const bengaliTextValidation = (fieldName) =>
     )
     .required(`${fieldName} is required`);
 
-// const data = {
-//   b_name: "মোঃ সাকীবুল ইসলাম",
-//   e_name: "MD SAKIBUL ISLAM",
-//   father_name: "মোঃ আব্দুস সালাম সিকদার",
-//   mother_name: "মোসাঃ শাহীনা বেগম",
-//   signature: "Sakibul Islam",
-//   nid_no: "4207590631",
-//   zila: "ঢাকা",
-//   upazila: "ঢাকা উত্তর সিটি  কর্পোরেশন",
-//   post_office: "মিরপুর - ৮৭৩০",
-//   village_or_road: "ইস্টার্ন হাউজিং, ব্লক-জে,রোড-এন/৮, দ্বিগুন",
-//   house_or_holding: "১৭",
-// };
-
 export default function NidPage() {
+  const { setPhoto } = useStore();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      b_name: "মোঃ সাকীবুল ইসলাম",
-      e_name: "MD SAKIBUL ISLAM",
-      father_name: "মোঃ আব্দুস সালাম সিকদার",
-      mother_name: "মোসাঃ শাহীনা বেগম",
-      signature: "Sakibul Islam",
-      nid_no: "4207590631",
+      b_name: "",
+      e_name: "",
+      father_name: "",
+      mother_name: "",
+      signature: "",
+      nid_no: "",
       dob: "",
-      zila: "ঢাকা",
-      upazila: "ঢাকা উত্তর সিটি কর্পোরেশন",
-      post_office: "মিরপুর - ৮৭৩০",
-      village_or_road: "ইস্টার্ন হাউজিং, ব্লক-জে,রোড-এন/৮, দ্বিগুন",
-      house_or_holding: "১৭",
+      zila: "",
+      upazila: "",
+      post_office: "",
+      village_or_road: "",
+      house_or_holding: "",
       blood_group: null,
       card_issue_date: "",
       photo: null,
@@ -97,6 +85,8 @@ export default function NidPage() {
         }
 
         await ApiKit.nid.create(formData);
+
+        setPhoto(payload.photo);
         router.push("/nid/generate?key=" + key);
       })();
 
